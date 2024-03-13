@@ -7,6 +7,7 @@ namespace ContosoPizza.Data
         public PizzaContext(DbContextOptions<PizzaContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
         public DbSet<ContosoPizza.Models.Pizza>? Pizzas { get; set; }
     }
