@@ -11,6 +11,7 @@ builder.Services.AddScoped<PizzaService>();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PizzaContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("ContosoPizzaConnection") ?? "Data Source=ContosoPizza.db"));
+builder.Services.AddHostedService<ServiceBusReceiverHostedService>(); // Register the hosted service
 
 var app = builder.Build();
 
@@ -18,7 +19,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -31,21 +31,20 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-// Add the Azure Service Bus message sending logic here
 await SendMessagesToServiceBusAsync(app.Services.GetRequiredService<IConfiguration>());
 
 app.Run();
 
 async Task SendMessagesToServiceBusAsync(IConfiguration configuration)
 {
-    string connectionString = configuration["ServiceBus:ConnectionString"] ?? throw new InvalidOperationException("Service Bus connection string must be configured.");
-    string topicName = configuration["ServiceBus:TopicName"] ?? throw new InvalidOperationException("Service Bus topic name must be configured.");
+    string connectionString = configuration["ServiceBus:ConnectionString"];
+    string topicName = configuration["ServiceBus:TopicName"];
 
     await using var client = new ServiceBusClient(connectionString);
     await using var sender = client.CreateSender(topicName);
     using var messageBatch = await sender.CreateMessageBatchAsync();
 
-    for (int i = 1; i <= 3; i++) // Example: sending 3 messages
+    for (int i = 1; i <= 3; i++)
     {
         if (!messageBatch.TryAddMessage(new ServiceBusMessage($"Message {i}")))
         {
