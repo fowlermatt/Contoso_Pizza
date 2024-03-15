@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
 using ContosoPizza.Data;
@@ -14,6 +13,9 @@ builder.Services.AddScoped<PizzaService>();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PizzaContext>(options =>
     options.UseSqlite("Data Source=ContosoPizza.db"));
+
+// Register the MessagingService as a hosted service
+builder.Services.AddHostedService<MessagingService>();
 
 var app = builder.Build();
 
