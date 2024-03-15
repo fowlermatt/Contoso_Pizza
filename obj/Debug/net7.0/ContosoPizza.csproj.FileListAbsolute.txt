@@ -1128,3 +1128,7 @@ C:\Users\Matt\Desktop\ContosoPizza\obj\Debug\net7.0\refint\ContosoPizza.dll
 C:\Users\Matt\Desktop\ContosoPizza\obj\Debug\net7.0\ContosoPizza.pdb
 C:\Users\Matt\Desktop\ContosoPizza\obj\Debug\net7.0\ContosoPizza.genruntimeconfig.cache
 C:\Users\Matt\Desktop\ContosoPizza\obj\Debug\net7.0\ref\ContosoPizza.dll
+C:\Users\Matt\Desktop\ContosoPizza\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\Matt\Desktop\ContosoPizza\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\Matt\Desktop\ContosoPizza\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Matt\Desktop\ContosoPizza\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll

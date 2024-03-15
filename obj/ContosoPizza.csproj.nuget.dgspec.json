@@ -40,6 +40,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.10.4, )"
+            },
             "Azure.Messaging.ServiceBus": {
               "target": "Package",
               "version": "[7.17.4, )"

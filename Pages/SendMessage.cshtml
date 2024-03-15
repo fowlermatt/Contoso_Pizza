@@ -1,0 +1,9 @@
+@page
+@model SendMessageModel
+
+<h2>Send Messages</h2>
+
+@if (!string.IsNullOrEmpty(Model.ConfirmationMessage))
+{
+    <p>@Model.ConfirmationMessage</p>
+}
